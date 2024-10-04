@@ -25,6 +25,7 @@ export class FormPage {
     this.studentMobile = page.locator("//*[text()='Mobile']/following-sibling::td")
     this.studentSubject = page.locator("//*[text()='Subjects']/following-sibling::td")
     this.studentAddress = page.locator("//*[text()='Address']/following-sibling::td")
+    this.form = page.locator("#userForm")
   }
 
   async visit() {
@@ -78,5 +79,15 @@ export class FormPage {
     expect(await this.studentSubject.textContent()).toEqual(ssubject);
     expect(await this.studentAddress.textContent()).toEqual(saddress)
 
+  }
+
+  async isCityFieldDisabled() {
+    const isDisabled = await this.city.isDisabled();
+    return isDisabled;
+  }
+
+  async validateFormClassWithoutAnyValue(className) {
+    await this.submitBtn.click()
+    await expect(this.form).toHaveClass(className);
   }
 }
