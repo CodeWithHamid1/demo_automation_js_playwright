@@ -17,6 +17,16 @@ test.describe("Test For Demo Form", () => {
     await formPage.validateFormData(config.data.Message, config.data.firsteNam, config.data.email,config.data.Gender, config.data.phone, config.data.subject, config.data.address)
   });
 
+  test("Test city field is disable until user don't add the state", async ({ formPage }) => {
+    await formPage.validateUserIsOnRegistartionPage(config.data.title);
+    const isDisabled = await formPage.isCityFieldDisabled();
+    console.log(`City field is disabled: ${isDisabled}`);
+  });
+
+  test("Submit form without any value and validate form class should be was-validated", async ({ formPage }) => {
+    await formPage.validateFormClassWithoutAnyValue("was-validated");
+    console.log(`Form class is was-validated"`);
+  });
 
   
 });
